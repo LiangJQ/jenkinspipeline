@@ -26,15 +26,16 @@ stages{
         }
 
         stage ('Deployments'){
-            agent { label 'master' }
             parallel{
                 stage ('Deploy to Staging'){
+                    agent { label 'master' }
                     steps {
                         sh "scp -i /var/jenkins_home/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
+                    agent { label 'master' }
                     steps {
                         sh "scp -i /var/jenkins_home/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps"
                     }
