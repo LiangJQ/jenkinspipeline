@@ -23,6 +23,16 @@ stages{
                 }
             }
         }
+        stage('Copy Archive') {
+            agent { label 'master' }
+            steps {
+                 script {
+                     step ([$class: 'CopyArtifact',
+                     projectName: 'Automated',
+                     filter: '**/target/*.war']);
+                 }
+            }
+        }
 
         stage ('Deployments'){
             parallel{
