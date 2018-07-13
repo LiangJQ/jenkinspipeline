@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'slave'
-    }
+    agent none
 
     parameters {
          string(name: 'tomcat_dev', defaultValue: '54.157.252.146', description: 'Staging Server')
@@ -14,6 +12,7 @@ pipeline {
 
 stages{
         stage('Build'){
+            agent { label 'slave' }
             steps {
                 sh 'mvn clean package'
             }
