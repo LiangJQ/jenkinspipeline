@@ -26,6 +26,7 @@ stages{
         }
 
         stage ('Deployments'){
+            agent { label 'master' }
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
