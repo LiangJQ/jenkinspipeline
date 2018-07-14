@@ -29,14 +29,14 @@ stages{
                 stage ('Deploy to Staging'){
                     agent { label 'master' }
                     steps {
-                        sh "scp ${JENKINS_HOME}/jobs/${WORKSPACE}/builds/${env.JOB_NAME}/archive/*/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
+                        sh "scp ${JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/archive/*/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     agent { label 'master' }
                     steps {
-                        sh "scp ${JENKINS_HOME}/jobs/${WORKSPACE}/builds/${env.JOB_NAME}/archive/*/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps"
+                        sh "scp ${JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/archive/*/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps"
                     }
                 }
             }
