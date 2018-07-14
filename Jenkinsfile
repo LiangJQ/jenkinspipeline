@@ -28,7 +28,6 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     agent { label 'master' }
-                    def 
                     steps {
                         sh "scp ${JENKINS_HOME}/jobs/${env.WORKSPACE}/builds/${env.BUILD_NUMBER}/archive/*/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
