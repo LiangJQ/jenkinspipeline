@@ -29,7 +29,6 @@ stages{
                 stage ('Deploy to Staging'){
                     agent { label 'master' }
                     steps {
-                        echo "${env}"
                         sh "scp ${JENKINS_HOME}/jobs/${WORKSPACE}/builds/${env.JOB_NAME}/archive/*/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
                 }
